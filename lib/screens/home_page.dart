@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:todo_app/main.dart';
-// import 'package:flutter_todo_app/data/local_storage.dart';
-// import 'package:flutter_todo_app/helper/translation_helper.dart';
-// import 'package:flutter_todo_app/main.dart';
-// import 'package:flutter_todo_app/models/task_model.dart';
-// import 'package:flutter_todo_app/widgets/custom_search_Delegate.dart';
-// import 'package:flutter_todo_app/widgets/task_list_item.dart';
-
-import '../data/local_storage.dart';
+import '../data/ı_local_storage.dart';
 import '../models/task_model.dart';
 import '../widgets/custom_search_delegate.dart';
 import '../widgets/task_list_item.dart';
@@ -64,10 +57,21 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+        child: const Icon(
+          Icons.add,
+          size: 30,
+          color: Colors.black,
+        ),
+        onPressed: () {
+          _showAddTaskBottomSheet();
+        },
+      ),
       body: _allTasks.isNotEmpty
           ? ListView.builder(
               itemBuilder: (context, index) {
-                var _oankiListeElemani = _allTasks[index];
+                var currentValue = _allTasks[index];
                 return Dismissible(
                   background: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -82,13 +86,13 @@ class _HomePageState extends State<HomePage> {
                       Text('Görevi Sil')
                     ],
                   ),
-                  key: Key(_oankiListeElemani.id),
+                  key: Key(currentValue.id),
                   onDismissed: (direction) {
                     _allTasks.removeAt(index);
-                    _localStorage.deleteTask(task: _oankiListeElemani);
+                    _localStorage.deleteTask(task: currentValue);
                     setState(() {});
                   },
-                  child: TaskItem(task: _oankiListeElemani),
+                  child: TaskItem(task: currentValue),
                 );
               },
               itemCount: _allTasks.length,

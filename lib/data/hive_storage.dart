@@ -1,14 +1,7 @@
 import 'package:hive/hive.dart';
 
 import '../models/task_model.dart';
-
-abstract class LocalStorage {
-  Future<void> addTask({required Task task});
-  Future<Task?> getTask({required String id});
-  Future<List<Task>> getAllTask();
-  Future<bool> deleteTask({required Task task});
-  Future<Task> updateTask({required Task task});
-}
+import 'ı_local_storage.dart';
 
 class HiveLocalStorage extends LocalStorage {
   late Box<Task> _taskBox;
@@ -30,13 +23,13 @@ class HiveLocalStorage extends LocalStorage {
 
   @override
   Future<List<Task>> getAllTask() async {
-    List<Task> _allTask = <Task>[];
-    _allTask = _taskBox.values.toList();
+    List<Task> allTask = <Task>[];
+    allTask = _taskBox.values.toList();
 
-    if (_allTask.isNotEmpty) {
-      _allTask.sort((Task a, Task b) => b.createdAt.compareTo(a.createdAt));
+    if (allTask.isNotEmpty) {
+      allTask.sort((Task a, Task b) => b.createdAt.compareTo(a.createdAt));
     }
-    return _allTask;
+    return allTask;
   }
 
   @override

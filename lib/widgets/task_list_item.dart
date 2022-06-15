@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 //import 'package:flutter_todo_app/data/local_storage.dart';
 import 'package:intl/intl.dart';
 
-import '../data/local_storage.dart';
+import '../data/ı_local_storage.dart';
 import '../main.dart';
 import '../models/task_model.dart';
 
 class TaskItem extends StatefulWidget {
-  Task task;
+  final Task task;
   TaskItem({Key? key, required this.task}) : super(key: key);
 
   @override
@@ -45,14 +45,14 @@ class _TaskItemState extends State<TaskItem> {
             setState(() {});
           },
           child: Container(
-            child: const Icon(
-              Icons.check,
-              color: Colors.white,
-            ),
             decoration: BoxDecoration(
                 color: widget.task.isCompleted ? Colors.green : Colors.white,
                 border: Border.all(color: Colors.grey, width: 0.8),
                 shape: BoxShape.circle),
+            child: const Icon(
+              Icons.check,
+              color: Colors.white,
+            ),
           ),
         ),
         title: widget.task.isCompleted

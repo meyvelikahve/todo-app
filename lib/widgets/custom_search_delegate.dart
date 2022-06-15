@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_todo_app/data/local_storage.dart';
-// import 'package:flutter_todo_app/main.dart';
-// import 'package:flutter_todo_app/models/task_model.dart';
-// import 'package:flutter_todo_app/widgets/task_list_item.dart';
 import 'package:todo_app/widgets/task_list_item.dart';
-
-import '../data/local_storage.dart';
 import '../models/task_model.dart';
-import 'package:get_it/get_it.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
   final List<Task> allTasks;
@@ -48,7 +41,7 @@ class CustomSearchDelegate extends SearchDelegate {
     return filteredList.length > 0
         ? ListView.builder(
             itemBuilder: (context, index) {
-              var _oankiListeElemani = filteredList[index];
+              var currentValue = filteredList[index];
               return Dismissible(
                 background: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -63,19 +56,19 @@ class CustomSearchDelegate extends SearchDelegate {
                     Text('Görevi Sil'),
                   ],
                 ),
-                key: Key(_oankiListeElemani.id),
+                key: Key(currentValue.id),
                 onDismissed: (direction) async {
                   filteredList.removeAt(index);
 
-                  //await locator<LocalStorage>().deleteTask(task: _oankiListeElemani);
+                  //await locator<LocalStorage>().deleteTask(task: currentValue);
                 },
-                child: TaskItem(task: _oankiListeElemani),
+                child: TaskItem(task: currentValue),
               );
             },
             itemCount: filteredList.length,
           )
-        : Center(
-            child: Text('search_not_found'),
+        : const Center(
+            child: Text('Görev bulunamadı.'),
           );
   }
 
