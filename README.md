@@ -1,6 +1,11 @@
 # todo_app
 
-A new Flutter project.
+A new Flutter project. In this project i prefer to using local storage with Hive package. We have one home page and that's all. Basic to-do application with local storage.
+
+
+https://user-images.githubusercontent.com/60466804/174331447-7401e21b-b5e0-4384-a066-6318c8f3ffc5.mp4
+
+
 
 ## Getting Started
 
